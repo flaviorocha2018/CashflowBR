@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import Notes from './pages/Notes';
+import Banks from './pages/Banks';
+import React from 'react';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const theme = createTheme({
+    palette: {
+      primary: {
+        type: 'ligth',
+        main: '#fefefe',
+      },
+      secondary: {
+        main: '#f50057',
+      },
+
+    },
+    props: {
+      MuiTooltip: {
+        arrow: true,
+      },
+    },
+      typography: {
+        fontFamily: 'Quicksand',
+        fontWeigthLigth: 400,
+        fontWeigthRegular: 500,
+        fontWeigthMedium: 600,
+        fontWeigthBold: 700,
+      }
+ 
+})
+
+
+class App extends React.Component{
+    render(){
+      return(
+        <ThemeProvider theme={ theme }>
+          <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Notes}/>
+            <Notes />
+            <Route path="/bancos" component={ Banks }/>
+            <Banks />
+          </Switch>
+         </BrowserRouter>
+        </ThemeProvider>
+      )
+    }
+};
 
 export default App;
