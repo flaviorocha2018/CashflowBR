@@ -1,20 +1,33 @@
 import Notes from './pages/Notes';
-import Banks from './pages/Banks';
+import CreateNotes from './pages/CreateNotes';
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
-import { styled } from '@mui/styles';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Layout from './components/Layout';
+import Login from './pages/Login';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 const theme = createTheme({
     palette: {
-      primary: {
-        type: 'ligth',
-        main: '#fefefe',
-      },
-      secondary: {
-        main: '#f50057',
-      },
+       
+        primary:{
+          main: '#2196F3',
+        }, 
+        secondary: {
+          main: '#607D8B',
+        },
+        error: {
+          main: '#D32F2F'
+        },
+        success: {
+          main: '#689F38'
+        },
+        warning: {
+          main: '#fab710'
+        },
+        action: {
+          main: '#fab710'
+        },
 
     },
     props: {
@@ -23,31 +36,33 @@ const theme = createTheme({
       },
     },
       typography: {
-        fontFamily: 'Quicksand',
-        fontWeigthLigth: 400,
-        fontWeigthRegular: 500,
-        fontWeigthMedium: 600,
+        fontFamily: 'Nunito',
+        fontWeightLight: 300,
+        fontWeigthRegular: 400,
+        fontWeigthMedium: 500,
+        fontWeigthSemiBold: 600,
         fontWeigthBold: 700,
+        fontWeigthExtraBold: 800,
       }
- 
 })
 
 
-class App extends React.Component{
-    render(){
-      return(
-        <ThemeProvider theme={ theme }>
-          <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={Notes}/>
-            <Notes />
-            <Route path="/bancos" component={ Banks }/>
-            <Banks />
-          </Switch>
-         </BrowserRouter>
-        </ThemeProvider>
-      )
-    }
-};
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+    <Router>
+    <Layout>
+    <Switch>
+        <Route exact path="/Layout" component={ Layout } />
+       {/* <Link to= "/login" component={ Login } /> */}
+        <Route exact path="/" component={ Notes } />   
+        <Link to="/create" component={ CreateNotes } />
+        
+   </Switch>
+    </Layout>       
+    </Router>
+    </ThemeProvider>
+  );
+}
 
 export default App;

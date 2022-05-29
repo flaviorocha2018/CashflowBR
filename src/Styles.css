@@ -1,0 +1,32 @@
+.appbar{
+    position: fixed;
+    top: 0;
+}
+.toolbar{
+  /*  background-color: rgb(146, 54, 54); */
+    width: 1100px;
+    margin-left: 220px;
+    top: 0;
+    height: 62px;
+}
+/* .listItem:hover{
+    color: rgb(236, 191, 41);
+} */
+.MuiToolbar-root{
+    width: 1065px;
+    margin-left: 255px;
+    height: 65px;
+    background-color:#1483dd;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+  /*  border: solid 3px yellow; */
+}
+
+.MuiContainer-root{
+    margin-bottom: 50px;
+}
+.MuiPaper-root{
+    background-color: blue;
+}
+
