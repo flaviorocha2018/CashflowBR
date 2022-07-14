@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import CashFlowContext from '../context/Context';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -14,7 +15,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useHistory } from 'react-router-dom';
 
-function Copyright(props) {
+function CheckLogin(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
@@ -30,18 +31,50 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+
+  const { userEmail, setUserEmail } = useContext(CashFlowContext);
+  const { userName, setUserName }= useContext(CashFlowContext)
+  const [password, setPassword] = useState({ password: '' });
+  const [enterBtn, setEnterBtn] = useState({ enterBtn: true });
   const history = useHistory();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    history.push('/Layout');
-    
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+  // useEffect(() => {
+  //   return() => {
+  //     localStorage.clear();
+  //     email('');
+  //   }
+
+  // },[])
+
+  window.addEventListener("beforeunload", function(e){
+    localStorage.clear();
+ }, false);
+
+  const handleChange = ({ target }) => {
+    const { name, value } = target;
+    if (name === 'userEmail') setUserEmail(value);
+    if (name === 'password') setPassword({ password: value });
   };
 
+  const validateEmail = (input) => {
+    const result = /^[^\s@]+@[^\s@]+\.com/;
+    return result.test(input);
+  };
+
+  useEffect(() => {
+    const MIN_LENGTH = 5;
+    if (validateEmail(userEmail) && password.password.length > MIN_LENGTH) {
+      setEnterBtn({ enterBtn: false });
+    } else setEnterBtn({ enterBtn: true });
+  }, [userEmail, password]);
+
+  const handleClick = () => {
+    localStorage.setItem('userEmail', JSON.stringify({ userEmail }));
+    history.push('/Layout');
+  
+  };
+
+// onSubmit={handleSubmit}
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -60,16 +93,19 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Entrar
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form"  noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
+              type="email"
+              id="userEmail"
               label="Digite seu Email"
-              name="email"
-              autoComplete="email"
+              name="userEmail"
+              autoComplete="off"
               autoFocus
+              value={ userEmail }
+              onChange={ handleChange }
             />
             <TextField
               margin="normal"
@@ -80,16 +116,20 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={ password.password }
+              onChange={ handleChange }
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Lembrar senha"
             />
             <Button
-              type="submit"
+              type="button"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={ enterBtn.enterBtn }
+              onClick={ () => handleClick() }
             >
               Entrar
             </Button>
@@ -107,7 +147,7 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <CheckLogin sx={{ mt: 1, mb: 6 }} />
       </Container>
     </ThemeProvider>
   );

@@ -1,7 +1,7 @@
 import { makeStyles } from '@mui/styles';
-import * as React  from 'react';
+import React, {useContext} from 'react';
+import '../Styles.css';
 import { Link, Route } from 'react-router-dom';
-
 import { Drawer, ListItemButton } from '@mui/material';
 import { Typography } from '@mui/material';
 import { List } from '@mui/material';
@@ -16,7 +16,7 @@ import { useLocation } from 'react-router-dom';
 import { AppBar } from '@mui/material';
 import { Toolbar } from '@mui/material';
 import { format } from 'date-fns';
-import '../Styles.css';
+import CashFlowContext from '../context/Context';
 import AccountBalanceRoundedIcon from '@mui/icons-material/AccountBalanceRounded';
 import Divider from '@mui/material/Divider';
 import PaymentsIcon from '@mui/icons-material/Payments';
@@ -27,7 +27,7 @@ import MovingSharpIcon from '@mui/icons-material/MovingSharp';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-
+import Box from '@mui/material/Box';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 
 // List Items
@@ -37,21 +37,18 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import GroupsSharpIcon from '@mui/icons-material/GroupsSharp';
 import DescriptionSharpIcon from '@mui/icons-material/DescriptionSharp';
-import AttachMoneySharpIcon from '@mui/icons-material/AttachMoneySharp';
 import DesktopWindowsTwoToneIcon from '@mui/icons-material/DesktopWindowsTwoTone';
 import PrintTwoToneIcon from '@mui/icons-material/PrintTwoTone';
 
-
-
-const drawerWidth = 255;
+const drawerWidth = 245;
 
 const useStyles = makeStyles((theme) => {
     return {
         page: {
             background: '#f8f9fa',
             width: '100%',
-            height: '475px',
-            marginTop: '60px',
+            height: '520px',
+            marginTop: '50px',
             marginLeft:'-1px',
             marginRight: '0px',
             padding: theme.spacing(3),
@@ -76,24 +73,33 @@ const useStyles = makeStyles((theme) => {
         },
 
       },
+
         active: {
+            color: '#2196f3',
             background: 'white',
         },
         title: {
             padding: theme.spacing(1),
         },
         appbar: {
-            width: `calc(100%-${drawerWidth}px)`
+            width: `calc(100%-${drawerWidth}px)`,
+            transform: 'translateZ(0)',
         },
-        toolbar:{
-            marginLeft: theme.spacing(10),
-        }, 
+       
         ListItemButton: {
           marginLeft: 'auto',
           '&:hover': {
             background: '#f8f9fa',
           }
         },
+          ToolbarRootAppBar:{
+          width: '1000px',
+          marginLeft: '255px',
+          height: '65px',
+          backgroundColor: '#1483dd',
+          color: 'white',
+          fontWeight: '700',
+      },
 
         date: {
             flexGrow: 1,
@@ -105,16 +111,21 @@ export default function Layout({children}){
     const classes = useStyles();
     const history = useHistory();
     const location = useLocation();
-    
+    const {userEmail, setUserEmail} = useContext(CashFlowContext);
     const [open, setOpen] = React.useState(true);
-    
+    console.log('userEmail', userEmail);
 
+
+    const handleClick = e => {
+     history.push('/login')
+    }
+   
 // Menu Items for Drawer
     const menuItems = [
         {
             text: 'Minhas Notas',
             icon: <FormatListNumberedIcon style={{color: '#e2e7ea'}} fontSize="medium" />,
-            path: '/',
+            path: '/notes',
         },
         {
             text: 'Inserir Post-It',
@@ -131,38 +142,38 @@ export default function Layout({children}){
         {
           text: 'Bancos',
           icon:  <AccountBalanceRoundedIcon style={{color: '#e2e7ea'}} />,
-          path: '/',
+          path: '/bancos',
         },
 
         {
           text: 'Centro de Custos',
           icon:  <AttachMoneyIcon style={{color: '#e2e7ea'}} />,
-          path: '/',
+          path: '/custos',
         },
         {
           text: 'Clientes',
           icon:   <PeopleAltIcon style={{color: '#e2e7ea'}} />,
-          path: '/',
+          path: '/clientstable',
         },
         {
           text: 'Despesas',
           icon:   <PaidIcon style={{color: '#e2e7ea'}} />,
-          path: '/',
+          path: '/expensestable',
         },
         {
           text: 'Fornecedores',
           icon:  <FactoryIcon style={{color: '#e2e7ea'}} />,
-          path: '/',
+          path: '/suppliers',
         },
         {
           text: 'Títulos a Pagar',
           icon:  <PaymentsIcon style={{color: '#e2e7ea'}} />,
-          path: '/',
+          path: '/accpayables',
         },
         {
           text: 'Títulos a Receber',
           icon:  <CurrencyExchangeSharpIcon style={{color: '#e2e7ea'}} />,
-          path: '/',
+          path: '/accrecvbles',
         },
         {
           text: 'Usuários',
@@ -173,10 +184,14 @@ export default function Layout({children}){
     return(   
 
         <div className={classes.root}>
-            <AppBar className={classes.appbar} elevation={1} position="fixed">    
+          <Box>
+            <AppBar className={classes.appbar} elevation={2} position="fixed"
+            sx={{display:{xs:"flex", md:"flex"}}}>    
             
-                <Toolbar style={ { margimleft: 1000 }}  width="1270px" className="toolbar">
-                    <Typography className={classes.date} ml={3}>
+            
+                <Toolbar className={classes.appbar}>
+                
+                    <Typography className={classes.date} ml={1} >
                         Bem Vindo ao CashFlowBR - Hoje:  {format(new Date(), 'do MMMM Y')}
                     </Typography>
 
@@ -185,9 +200,9 @@ export default function Layout({children}){
                    <PopupState variant="popover" popupId="demo-popup-menu">
                         {(popupState) => (
                           <React.Fragment>
-                            
+                            <DesktopWindowsTwoToneIcon sx={{marginRight: 1 }}/>
                             <Button variant="text" {...bindTrigger(popupState)}
-                            sx={{ bgcolor: "#1483dd", color: "#ffffff", mr: 5, mt: 1 }}
+                            sx={{ bgcolor: "#1483dd", color: "#ffffff", mr: 3, mt: 0.7 }}
                             >
                               Consultas
                             </Button>
@@ -195,31 +210,31 @@ export default function Layout({children}){
                             <Menu {...bindMenu(popupState)} sx={{ mt: 1 }}>
                             <Route>
                               <MenuItem component={Link} to="/create" onClick={popupState.close}>
-                               <DesktopWindowsTwoToneIcon sx={{marginRight: 1}}/>Títulos a Pagar</MenuItem>
+                               Títulos a Pagar</MenuItem>
                               <MenuItem component={Link} to="/create" onClick={popupState.close}>
-                               <DesktopWindowsTwoToneIcon sx={{marginRight: 1}}/> Títulos a Receber</MenuItem>
+                               Títulos a Receber</MenuItem>
                               <Divider color="#616161" mt={1} /> 
                               <MenuItem component={Link} to="/create" onClick={popupState.close}>
-                               <DesktopWindowsTwoToneIcon sx={{marginRight: 1}}/>Lançamentos Bancários</MenuItem>
+                               Lançamentos Bancários</MenuItem>
                               <Divider color="#616161" mt={1} /> 
                               <MenuItem onClick={popupState.close}>
-                               <DesktopWindowsTwoToneIcon sx={{marginRight: 1}}/>Títulos Pagos</MenuItem>
+                               Títulos Pagos</MenuItem>
                               <MenuItem onClick={popupState.close}>
-                               <DesktopWindowsTwoToneIcon sx={{marginRight: 1}}/>Títulos Recebidos</MenuItem>
+                               Títulos Recebidos</MenuItem>
                               </Route>
                             </Menu>
                           
                           </React.Fragment>
                         )}
-                  </PopupState>
+                  </PopupState> 
                   
                    {/* App-Bar - Relatórios */}
                    <PopupState variant="popover" popupId="demo-popup-menu">
                         {(popupState) => (
                           <React.Fragment>
-                            
+                            <PrintTwoToneIcon sx={{marginRight: 1 }}/>
                             <Button variant="text" {...bindTrigger(popupState)}
-                            sx={{ bgcolor: "#1483dd", color: "#ffffff", mr: 23, mt: 1 }}
+                            sx={{ bgcolor: "#1483dd", color: "#ffffff", mr: 6, mt: 0.7 }}
                             >
                               Relatórios
                             </Button>
@@ -227,22 +242,22 @@ export default function Layout({children}){
                             <Menu {...bindMenu(popupState)} sx={{ mt: 1 }}>
                             <Route>
                               <MenuItem component={Link} to="/create" onClick={popupState.close}>
-                               <PrintTwoToneIcon sx={{marginRight: 1}}/>Extrato de Lançamentos</MenuItem>
+                               Extrato de Lançamentos</MenuItem>
                               <MenuItem component={Link} to="/create" onClick={popupState.close}>
-                              <PrintTwoToneIcon sx={{marginRight: 1}}/>Títulos a Pagar em aberto - Total</MenuItem>
+                              Títulos a Pagar em aberto - Total</MenuItem>
                               <MenuItem component={Link} to="/create" onClick={popupState.close}>
-                              <PrintTwoToneIcon sx={{marginRight: 1}}/>Títulos a Pagar por Fornecedor</MenuItem>
+                              Títulos a Pagar por Fornecedor</MenuItem>
                               <Divider color="#616161" mt={1} /> 
                               <MenuItem component={Link} to="/create" onClick={popupState.close}>
-                              <PrintTwoToneIcon sx={{marginRight: 1}}/>Títulos a Receber em aberto</MenuItem>
+                              Títulos a Receber em aberto</MenuItem>
                               <Divider color="#616161" mt={1} /> 
                               <MenuItem component={Link} to="/create" onClick={popupState.close}>
-                              <PrintTwoToneIcon sx={{marginRight: 1}}/>Títulos Pagos</MenuItem>
+                              Títulos Pagos</MenuItem>
                               <MenuItem component={Link} to="/create" onClick={popupState.close}>
-                              <PrintTwoToneIcon sx={{marginRight: 1}}/>Títulos Recebidos</MenuItem>
+                              Títulos Recebidos</MenuItem>
                               <Divider color="#616161" mt={1} /> 
                               <MenuItem component={Link} to="/create" onClick={popupState.close}>
-                              <PrintTwoToneIcon sx={{marginRight: 1}}/>D.R.E</MenuItem>
+                              D.R.E</MenuItem>
                               
                               </Route>
                             </Menu>
@@ -251,14 +266,22 @@ export default function Layout({children}){
                         )}
                   </PopupState>
 
-                  <Button type="button" variant="text" 
-                  sx={{ bgcolor: "#1483dd", color: "#ffffff", mt:1, marginRight: 7 }}
-                  // onClick={() => { history.push('/login') }}
-                  >Login</Button> 
-                
-                </Toolbar>
+                  <Typography sx={{color: "#ffffff", mr: 2 }}>
+                     {userEmail}
+                  </Typography>
 
+                  <Link to="/login" style={{ textDecoration: "none", color: "white" }}>
+                  <Button type="button" variant="text" 
+                  sx={{ bgcolor: "#1483dd", color: "#ffffff", mt:0.7, marginRight: 13 }}
+                  onClick={() => { handleClick() }} >
+                   
+                  Sair</Button>
+                  </Link>
+              
+                </Toolbar>
+                
             </AppBar>
+            </Box>
             <Drawer PaperProps={{ sx: {backgroundColor: "#262C29" ,color: "#e0e0e0",}}}
                 className={classes.drawer} variant="permanent" elevation={1}
                 anchor="left" classes={{paper: classes.drawerPaper}}>
@@ -285,7 +308,7 @@ export default function Layout({children}){
                 </ListItem>
               ))}
             </List>
-            {/* <Divider color="#616161" mt={2}/> */}
+            <Divider color="#616161" mt={2}/>
 
             <List 
             dense
@@ -299,23 +322,11 @@ export default function Layout({children}){
         >
           <Divider color="#616161" mt={1} />  
 
-          <ListItemButton mb={3}>
+          <ListItemButton mb={3} onClick={() => history.push("/bankgmovtable")}>
             <ListItemIcon>
               <AccountBalanceRoundedIcon style={{color: '#e2e7ea'}} />
             </ListItemIcon>
-            <ListItemText sx={{ mt: 1 }} primary="Lançamentos Bancários" className='listItem'/>
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <AttachMoneySharpIcon style={{color: '#e2e7ea'}} />
-            </ListItemIcon>
-            <ListItemText primary="Pagamento de Títulos" className='listItem' />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <CurrencyExchangeSharpIcon style={{color: '#e2e7ea'}} />
-            </ListItemIcon>
-            <ListItemText sx={{ mb: 1 }} primary="Recebimento de Títulos" className='listItem' />
+            <ListItemText sx={{ mt: 1, mb: 1 }} primary="Lançamentos Bancários" className='listItem' />
           </ListItemButton>
             
           <Divider color="#616161" mt={1} />
@@ -323,7 +334,7 @@ export default function Layout({children}){
             <ListItemIcon>
               <InventoryIcon style={{color: '#e2e7ea'}} />
             </ListItemIcon>
-            <ListItemText sx={{ mb: 1 }} primary="Cadastros" className='listItem' />
+            <ListItemText sx={{ mb: 1, mt: 1 }} primary="Cadastros" className='listItem' />
           </ListItemButton>
           <Divider color="#616161" mt={1} />
 
@@ -343,7 +354,8 @@ export default function Layout({children}){
                 </ListItem>
               ))}
             </List>
-          {/* novo item dropdown */}
+
+          {/*  novo item dropdown */}
           
         </List>
            
