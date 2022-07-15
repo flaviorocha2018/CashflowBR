@@ -13,8 +13,8 @@ import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableContainer from '@mui/material/TableContainer';
 import { makeStyles } from '@mui/styles';
-import { TableRow, TableBody, TableCell } from '@mui/material';
-import Popup from '../components/Poup';
+import { TableRow, TableBody, TableCell, Button } from '@mui/material';
+import PopUp from '../components/PopUp';
 import Notification from '../components/Notifications';
 import ConfirmDialog from '../components/ConfirmDialog';
 import Grid from '@mui/material/Grid';
@@ -186,8 +186,8 @@ const onDelete = id => {
         
         <Box sx={{width: "1060px", ml: "-4px"}}>
         <Paper className={classes.pageContent}> 
-        <Grid container direction= 'row' sx={{width: "700px"}}>
-        <Controls.Input sx={{width: "700px"}}
+        <Box display='flex' justifyContent= 'space-between' alignItems= 'center'>
+        <Controls.Input sx={{width: "500px"}}
                         label="Pesquisar Fornecedor"
                         className={classes.searchInput}
                         InputProps={{
@@ -198,17 +198,17 @@ const onDelete = id => {
                         onChange={(e) => handleSearch}
                     />
 
-                   <Box >
-                    <Grid  >
-                    <Controls.Button sx={{mr: '50px'}}
-                        text="Adicionar"
-                        variant="outlined"
-                        color="primary"
-                        startIcon={<AddIcon />}
-                        className={classes.newButton}
-                        onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}
-                    /></Grid></Box>
-                    </Grid>
+                    
+                  <Button
+                   variant="outlined"
+                   color="secondary"
+                   startIcon={<AddIcon />}
+                   size={"large"}
+                   onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}
+                   >
+                   Adicionar
+                    </Button>
+                    </Box>
         <TableContainer sx={{maxHeight: '400px'}}>
         <Table stickyHeader aria-label="simple table">
           <TableHead>
@@ -263,7 +263,7 @@ const onDelete = id => {
  
             </Paper>
             </Box>
-            <Popup
+            <PopUp
                 title="Inserir Fornecedores"
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
@@ -273,7 +273,7 @@ const onDelete = id => {
                     margimBottom="350px"
                     recordForEdit={recordForEdit}
                     addOrEdit={addOrEdit} />
-            </Popup>
+            </PopUp>
             <Notification
                 notify={notify}
                 setNotify={setNotify}

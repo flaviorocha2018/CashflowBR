@@ -3,8 +3,9 @@ import Table from '@mui/material/Table';
 import PageHeader from '../components/PageHeader';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
+import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import Popup from '../components/Poup';
+import PopUp from '../components/PopUp';
 import SearchIcon from '@mui/icons-material/Search';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -13,7 +14,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
-import Poup from '../components/Poup';
 import AddIcon from '@mui/icons-material/Add';
 import Bancos from '../pages/Bancos';
 import Controls from '../components/controls/Controls';
@@ -116,7 +116,7 @@ const openInPopup = item => {
         
         <Box sx={{width: "1060px", ml: "-4px"}}>
         <Paper className={classes.pageContent}> 
-        <Grid container direction= 'row' sx={{width: "700px"}}>
+        <Box display='flex' justifyContent= 'space-between' alignItems= 'center'>
         <Controls.Input sx={{width: "700px"}}
                         label="Pesquisar Banco"
                         className={classes.searchInput}
@@ -128,17 +128,16 @@ const openInPopup = item => {
                         onChange={(e) => handleSearch}
                     />
 
-                   <Box sx={{color: 'red'}}>
-                    <Grid  >
-                    <Controls.Button sx={{mr: '50px'}}
-                        text="Adicionar"
-                        variant="outlined"
-                        color="primary"
-                        startIcon={<AddIcon />}
-                        className={classes.newButton}
-                        onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}
-                    /></Grid></Box>
-                    </Grid>
+                  <Button
+                   variant="outlined"
+                   color="secondary"
+                   startIcon={<AddIcon />}
+                   size={"large"}
+                   onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}
+                   >
+                   Adicionar
+                    </Button>
+                    </Box>
         
     <TableContainer sx={{maxHeight: '400px'}}>
       <Table sx={{ minWidth: 1800, mt: 2 }} size="small" aria-label="a dense table">
@@ -189,7 +188,7 @@ const openInPopup = item => {
     
       </Paper>
       </Box>
-      <Popup
+      <PopUp
                 title="Inserir / Editar - Bancos"
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
@@ -199,7 +198,7 @@ const openInPopup = item => {
           margimBottom="350px"
           recordForEdit={recordForEdit}
           addOrEdit={addOrEdit} />
-        </Popup>
+        </PopUp>
     </>
   );
 }

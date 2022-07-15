@@ -11,6 +11,24 @@
       "details": "Tarefa não concluída!",
       "status": "Normal",
       "id": "nZ8XNSB"
+    },
+    {
+      "title": "Alterações de Button Center-Cost OK",
+      "details": "Botão do Centro de custos OK.  Falta refazer de : Bancos Table, Clientes Table, Despesas Table, Fornecedores Table, Títulos a Pagar, Títulos a Receber, ",
+      "status": "Urgente",
+      "id": "OA1mfeR"
+    },
+    {
+      "title": "Consertar botão Salvar em cadastrar Post-It",
+      "details": "Botão salvar não redireciona para notas, está indo para Login.",
+      "status": "Normal",
+      "id": "4gjTcUU"
+    },
+    {
+      "title": "Resolvendo botão Salvar do Post-It",
+      "details": "Teste do botão salvar Resolvido.",
+      "status": "Normal",
+      "id": "rwLq9ii"
     }
   ]
 }

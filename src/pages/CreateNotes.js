@@ -50,7 +50,7 @@ export default function Bancos(){
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify({ title, details, status })
             })
-            .then(() =>  history.push('/'))
+            .then(() =>  history.push('/notes'))
         }
     }
 

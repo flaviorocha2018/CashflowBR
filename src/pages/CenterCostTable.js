@@ -12,7 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableContainer from '@mui/material/TableContainer';
 import { makeStyles } from '@mui/styles';
 import { TableRow, TableBody, TableCell, Button } from '@mui/material';
-import Popup from '../components/Poup';
+import PopUp from '../components/PopUp';
 import Notification from '../components/Notifications';
 import ConfirmDialog from '../components/ConfirmDialog';
 import Grid from '@mui/material/Grid';
@@ -132,7 +132,7 @@ const onDelete = id => {
         <Box sx={{width: "1060px", ml: "-4px"}}>
         <Paper className={classes.pageContent}> 
         <Box display='flex' justifyContent= 'space-between' alignItems= 'center'>
-        <Controls.Input sx={{width: "700px"}}
+        <Controls.Input sx={{width: "500px"}}
                         label="Pesquisar Fornecedor"
                         className={classes.searchInput}
                         InputProps={{
@@ -204,7 +204,7 @@ const onDelete = id => {
  
             </Paper>
             </Box>
-            <Popup
+            <PopUp
                 title="Inserir / Editar - Centro de Custos"
                 openPopup={openPopup}
                 setOpenPopup={setOpenPopup}
@@ -214,7 +214,7 @@ const onDelete = id => {
                     margimBottom="350px"
                     recordForEdit={recordForEdit}
                     addOrEdit={addOrEdit} />
-            </Popup>
+            </PopUp>
             <Notification
                 notify={notify}
                 setNotify={setNotify}
