@@ -8,6 +8,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Grid from '@mui/material/Grid';
 import SelectState from '../components/SelectState';
 import CashFlowContext from '../context/Context';
+// import { DatePicker } from '@mui/x-date-pickers';
 
 // import Stack from '@mui/material/Stack';
 // import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -134,7 +135,9 @@ const handleSubmit = (e) => {
                 sx={{width: "406px", ml: 2}} required className={classes.field} name="fullName"
                 value={values.fullName}  error={ fullNameError }
                 onChange={ handleInputChange }/>
-                
+
+                {/* <DatePicker  onChange={ console.log }
+                renderInput={(params) => <TextField {...params} />}/> */}
                 </Grid></Box>
 
               

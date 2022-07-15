@@ -28,7 +28,6 @@ function CheckLogin(props) {
   );
 }
 
-const theme = createTheme();
 
 export default function SignIn() {
 
@@ -74,9 +73,11 @@ export default function SignIn() {
   
   };
 
+  
+
 // onSubmit={handleSubmit}
   return (
-    <ThemeProvider theme={theme}>
+   
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -149,6 +150,5 @@ export default function SignIn() {
         </Box>
         <CheckLogin sx={{ mt: 1, mb: 6 }} />
       </Container>
-    </ThemeProvider>
   );
 }

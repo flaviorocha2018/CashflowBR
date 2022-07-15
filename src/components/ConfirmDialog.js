@@ -1,7 +1,8 @@
 import React from 'react'
-import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, makeStyles, IconButton } from '@material-ui/core'
+import { Dialog, DialogTitle, DialogContent, DialogActions, Typography, IconButton } from '@mui/material'
 import Controls from "./controls/Controls";
 import LocationOffIcon from '@mui/icons-material/LocationOff';
+import { makeStyles } from '@mui/styles';
 
 
 const useStyles = makeStyles(theme => ({

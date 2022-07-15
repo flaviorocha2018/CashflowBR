@@ -9,12 +9,13 @@ import BancosTable from '../pages/BancosTable';
 import ClientsTable from '../pages/ClientsTable';
 import CenterCostTable from '../pages/CenterCostTable';
 import ExpensesTable from '../pages/ExpensesTable';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import  AdapterDateFns  from '@mui/lab/AdapterDateFns';
 import SupplierTable from '../pages/SupplierTable';
 import AccPayablesTable from '../pages/AccPayablesTable';
 import AccRecvblesTable from '../pages/AccRecvblesTable';
 import BankingMovimentTable from '../pages/BankingMovimentTable';
+import { LocalizationProvider } from '@mui/lab';
+import ptBRLocale from 'date-fns/locale/pt-BR';
 
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
     <Router>
     <Switch>
     <Layout>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBRLocale}>
         <Route exact path="/" component={ Login } />
         <Route exact path="/notes" component={ Notes } />
         <Route exact path="/layout" component={ Layout } />

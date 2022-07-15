@@ -1,12 +1,6 @@
 {
   "notes": [
     {
-      "title": "Inserindo outro título Urgente",
-      "details": "Descrição Urgente - Vamos trocar os tamanhos das fontes",
-      "status": "Urgente",
-      "id": "kZO0aRo"
-    },
-    {
       "title": "Resolução de Post-it efetuado com sucesso!",
       "details": "Tentar fazer a cor mudar após tornar o checkbox resolvido, para a cor verde. Vamos tentar mais um pouco.",
       "status": "Normal",
