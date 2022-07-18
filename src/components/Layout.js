@@ -22,15 +22,11 @@ import Divider from '@mui/material/Divider';
 import PaymentsIcon from '@mui/icons-material/Payments';
 import CurrencyExchangeSharpIcon from '@mui/icons-material/CurrencyExchangeSharp';
 import MovingSharpIcon from '@mui/icons-material/MovingSharp';
-
-// Menu Items
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
-
-// List Items
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import ListSubheader from '@mui/material/ListSubheader';
 import InventoryIcon from '@mui/icons-material/Inventory';
@@ -39,6 +35,21 @@ import GroupsSharpIcon from '@mui/icons-material/GroupsSharp';
 import DescriptionSharpIcon from '@mui/icons-material/DescriptionSharp';
 import DesktopWindowsTwoToneIcon from '@mui/icons-material/DesktopWindowsTwoTone';
 import PrintTwoToneIcon from '@mui/icons-material/PrintTwoTone';
+
+
+// interface IListItemLinkProps {
+//   to: string;
+// }
+
+// const ListItemLink: React.FC<IListItemLinkProps> = ({ to }) => {
+
+
+//   // const resolvedPath = useResolvedPath(to);
+//   // const match = useMatch({ path: resolvedPath.pathname, end: false });
+
+//   };
+
+
 
 const drawerWidth = 245;
 
@@ -114,6 +125,11 @@ export default function Layout({children}){
     const {userEmail, setUserEmail} = useContext(CashFlowContext);
     const [open, setOpen] = React.useState(true);
     console.log('userEmail', userEmail);
+
+    
+    // const resolvedPath = matchPath();
+    // const match = useRouteMatch({path: resolvedPath.pathname, end: false })
+   
 
 
     const handleClick = e => {
@@ -296,6 +312,7 @@ export default function Layout({children}){
             <List>
               {menuItems.map((item) => (
                 <ListItem 
+                  // selected={!!match}
                   button 
                   dense
                   key={item.text} 

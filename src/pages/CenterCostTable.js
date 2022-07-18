@@ -146,7 +146,7 @@ const onDelete = id => {
                    
                    <Button
                    variant="outlined"
-                   color="secondary"
+                   color="primary"
                    startIcon={<AddIcon />}
                    size={"large"}
                    onClick={() => { setOpenPopup(true); setRecordForEdit(null); }}

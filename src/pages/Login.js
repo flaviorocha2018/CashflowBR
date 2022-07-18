@@ -12,8 +12,10 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useHistory } from 'react-router-dom';
+// import * as yup from 'yup';
+
+
 
 function CheckLogin(props) {
   return (
@@ -28,25 +30,34 @@ function CheckLogin(props) {
   );
 }
 
+// interface IformLogin{
+//   userName: string;
+//   userEmail: string;
+//   password: string;
+// }
+
+
+// const formValidationSchema: yup.SchemaOf<IformLogin> = yup.object().shape({
+//   userName: yup.string().required().min(3),
+//   userEmail: yup.string().required().email(),
+//   password: yup.string().required().password(),
+
+// });
 
 export default function SignIn() {
 
   const { userEmail, setUserEmail } = useContext(CashFlowContext);
   const { userName, setUserName }= useContext(CashFlowContext)
+  const [ isLoading, setIsLoading] = useState(false);
   const [password, setPassword] = useState({ password: '' });
   const [enterBtn, setEnterBtn] = useState({ enterBtn: true });
+  const [loginForm, setLoginForm] = useState(false);  // trying to hide login Form
   const history = useHistory();
 
-  // useEffect(() => {
-  //   return() => {
-  //     localStorage.clear();
-  //     email('');
-  //   }
 
-  // },[])
 
   window.addEventListener("beforeunload", function(e){
-    localStorage.clear();
+    localStorage.clear();  // clear local storage before unload - working fine.
  }, false);
 
   const handleChange = ({ target }) => {
@@ -69,13 +80,13 @@ export default function SignIn() {
 
   const handleClick = () => {
     localStorage.setItem('userEmail', JSON.stringify({ userEmail }));
-    history.push('/Layout');
+    history.push('/Layout');  // desired route after login is pushing correctly.
+
+    // code here
+    // how to hide this loginform after the router above. ????
   
   };
 
-  
-
-// onSubmit={handleSubmit}
   return (
    
       <Container component="main" maxWidth="xs">
@@ -101,7 +112,7 @@ export default function SignIn() {
               fullWidth
               type="email"
               id="userEmail"
-              label="Digite seu Email"
+              label="Type your Email"
               name="userEmail"
               autoComplete="off"
               autoFocus
@@ -113,7 +124,7 @@ export default function SignIn() {
               required
               fullWidth
               name="password"
-              label="Digite a Senha"
+              label="Type your Password"
               type="password"
               id="password"
               autoComplete="current-password"

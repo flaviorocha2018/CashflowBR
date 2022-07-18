@@ -8,6 +8,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import Grid from '@mui/material/Grid';
 import SelectState from '../components/SelectState';
 import CashFlowContext from '../context/Context';
+// import * as yup from 'yup';
 // import { DatePicker } from '@mui/x-date-pickers';
 
 // import Stack from '@mui/material/Stack';
@@ -60,6 +61,8 @@ const useStyles = makeStyles((theme) => {
     }
 });
 
+  
+
 export default function Bancos(props){
     const { addOrEdit } = props 
     const classes = useStyles()
@@ -82,7 +85,97 @@ export default function Bancos(props){
     const [stateId, setStateId] = useState('');
     const [ values, setValues ] = useState(initialValues);
     const [ value, setValue ] = useState(initialSelectValues)
+    const [ isLoading, setIsLoading] = useState(false);
+
+    // Validação do Form Bancos -*- Interrompida -*-
+
+    // interface IformBancos{
+       
+    //     fullName: string;
+    //     address: string;
+    //     local: string;
+    //     city: string;
+    //     CEP: string;
+    //     phone: string;
+    //     celular: string;
+    //     contact: string;
+    //     email: string;
+    //     numBank: string;
+    //     branch: string;
+    //     account: string;
+       
+    //   }
+      
+      
+    //   const formValidationSchema: yup.SchemaOf<IformBancos> = yup.object().shape({
+    //     fullName: yup.string().required('Preenchimento obrigatório').min(3),
+    //     address: yup.string().required('Preenchimento obrigatório').email(),
+    //     local: yup.string().required('Preenchimento obrigatório').password(),
+    //     city: yup.string().required('Preenchimento obrigatório').min(3),
+    //     CEP: yup.string().required('Preenchimento obrigatório').min(3),
+    //     phone: yup.string().required('Preenchimento obrigatório').min(3),
+    //     celular: yup.string().required('Preenchimento obrigatório').min(3),
+    //     contact: yup.string().required('Preenchimento obrigatório').min(3),
+    //     email: yup.string().required('Preenchimento obrigatório').emai(),
+    //     numBank: yup.string().required('Preenchimento obrigatório').min(3),
+    //     branch: yup.string().required('Preenchimento obrigatório').min(3),
+    //     account: yup.string().required('Preenchimento obrigatório').min(3),
+
+      
+    //   });
     
+    //   const handleSave = (dados: IformLogin) => {
+    //     formValidationSchema
+    //     .validate(dados, { abortEarly: false })
+    //     .then((dadosValidados) => {
+    //       setIsLoading(true);
+  
+    //       if (id === 'nova') {
+    //         BancoService
+    //           .create(dadosValidados)
+    //           .then((result) => {
+    //             setIsLoading(false);
+  
+    //             if (result instanceof Error) {
+    //               alert(result.message);
+    //             } else {
+    //               if (isSaveAndClose()) {
+    //                 navigate('/pessoas');
+    //               } else {
+    //                 navigate(`/pessoas/detalhe/${result}`);
+    //               }
+    //             }
+    //           });
+    //       } else {
+    //         BancoService
+    //           .updateById(Number(id), { id: Number(id), ...dadosValidados })
+    //           .then((result) => {
+    //             setIsLoading(false);
+  
+    //             if (result instanceof Error) {
+    //               alert(result.message);
+    //             } else {
+    //               if (isSaveAndClose()) {
+    //                 navigate('/pessoas');
+    //               }
+    //             }
+    //           });
+    //       }
+    //     })
+    //     .catch((errors: yup.ValidationError) => {
+    //         const validationErrors: {[key: string]: string } = {};
+    //         errors.inner.foreach(error => {
+    //             if(!error.path) return;
+
+    //             validationErrors[error.path] = error.message;
+
+    //         });
+            
+    //         formRef.current?.setErrors(validationErrors)
+
+    //     })
+        
+    // }
 
     const handleInputChange = e => {
         const { name, value } = e.target
